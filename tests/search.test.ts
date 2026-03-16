@@ -1,6 +1,7 @@
 /** Tests for the search tool. */
 
-import { describe, expect, it, mock, beforeEach } from "bun:test";
+import { describe, expect, it, mock, beforeEach, afterEach } from "bun:test";
+import { config } from "../src/config";
 
 // Mock fetch before importing the module
 const mockFetch = mock(() =>
@@ -28,13 +29,23 @@ const mockFetch = mock(() =>
   ),
 );
 
-// We need to set the env var before importing
-process.env.BRAVE_API_KEY = "test-key-123";
+const originalFetch = globalThis.fetch;
+const originalBraveKey = (config as any).braveApiKey;
+const originalSerpKey = (config as any).serpApiKey;
 
 describe("search tool", () => {
   beforeEach(() => {
     mockFetch.mockClear();
     globalThis.fetch = mockFetch as unknown as typeof fetch;
+    // Ensure config always routes to Brave (regardless of module cache order in full suite)
+    (config as any).braveApiKey = "test-key-123";
+    (config as any).serpApiKey = "";
+  });
+
+  afterEach(() => {
+    globalThis.fetch = originalFetch;
+    (config as any).braveApiKey = originalBraveKey;
+    (config as any).serpApiKey = originalSerpKey;
   });
 
   it("should call Brave API with correct params", async () => {

@@ -109,7 +109,7 @@ Ordered by dependency. Heartbeat works top to bottom.
 - [x] [S] src/api/billing/checkout.ts — POST /v1/billing/checkout
 - [x] [S] src/api/billing/portal.ts — POST /v1/billing/portal
 - [x] [C] src/api/billing/webhooks.ts — checkout.completed, invoice.succeeded/failed, subscription.deleted
-- [ ] [S] tests/billing.test.ts (mock Stripe)
+- [x] [S] tests/billing.test.ts (mock Stripe)
 
 ### Crypto (USDC on Base) ✅
 - [x] [C] src/billing/crypto/wallet.ts — HD wallet, deterministic address per project (ethers.js)

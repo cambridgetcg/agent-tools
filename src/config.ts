@@ -29,11 +29,11 @@ export const config = {
 
   // Credit costs per operation
   credits: {
-    search: Number(env("CREDIT_SEARCH", "1")),
-    scrape: Number(env("CREDIT_SCRAPE", "2")),
-    browse: Number(env("CREDIT_BROWSE", "5")),
-    document: Number(env("CREDIT_DOCUMENT", "3")),
-    executePer10s: Number(env("CREDIT_EXECUTE_PER_10S", "1")),
+    search: Number(env("CREDIT_SEARCH", "5")),      // SerpAPI = $0.015/call
+    scrape: Number(env("CREDIT_SCRAPE", "1")),      // Just a fetch
+    browse: Number(env("CREDIT_BROWSE", "5")),      // Headless browser
+    document: Number(env("CREDIT_DOCUMENT", "3")),  // Parse + extract
+    executePer10s: Number(env("CREDIT_EXECUTE_PER_10S", "2")), // CPU time
   },
 
   // agent-economy (billing authority — internal)
@@ -46,6 +46,7 @@ export const config = {
     scale: { credits: 25_000, ratePerMin: 300 },
     enterprise: { credits: Infinity, ratePerMin: 1_000 },
   },
+  browseConcurrency: Number(env("BROWSE_CONCURRENCY", "3")),
 } as const;
 
 function env(key: string, fallback: string): string {
