@@ -205,8 +205,8 @@ export async function handleSubscriptionDeleted(subscription: Stripe.Subscriptio
 
   await db
     .update(projects)
-    .set({ plan: "dev" })
+    .set({ plan: "free" })
     .where(eq(projects.stripeCustomerId, customerId));
 
-  console.info(`[billing] Subscription deleted for customer ${customerId}. Downgraded to dev.`);
+  console.info(`[billing] Subscription deleted for customer ${customerId}. Downgraded to free.`);
 }

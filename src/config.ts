@@ -39,12 +39,12 @@ export const config = {
   // agent-economy (billing authority — internal)
   economyUrl: env("ECONOMY_URL", "http://localhost:8004"),
 
-  // Plan limits
+  // Plan limits (tier names match agent-economy subscription plans)
   plans: {
-    dev: { credits: 100, ratePerMin: 10 },
-    builder: { credits: 5_000, ratePerMin: 60 },
-    scale: { credits: 25_000, ratePerMin: 300 },
-    enterprise: { credits: Infinity, ratePerMin: 1_000 },
+    free: { credits: 100, ratePerMin: 10 },
+    seed: { credits: 5_000, ratePerMin: 60 },
+    grow: { credits: 25_000, ratePerMin: 300 },
+    scale: { credits: Infinity, ratePerMin: 1_000 },
   },
   browseConcurrency: Number(env("BROWSE_CONCURRENCY", "3")),
 } as const;

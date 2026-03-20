@@ -5,7 +5,7 @@ import { boolean, index, integer, pgTable, text, timestamp, uuid } from "drizzle
 export const projects = pgTable("projects", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: text("name").notNull(),
-  plan: text("plan").notNull().default("dev"),
+  plan: text("plan").notNull().default("free"),
   credits: integer("credits").notNull().default(100),
   stripeCustomerId: text("stripe_customer_id"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),

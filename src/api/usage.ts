@@ -72,7 +72,7 @@ app.get("/", authMiddleware, async (c) => {
 
   return c.json({
     credits_remaining: proj?.credits ?? 0,
-    plan: proj?.plan ?? "dev",
+    plan: proj?.plan ?? "free",
     today: {
       credits_used: Number(todayStats?.total ?? 0),
       calls: Number(todayStats?.count ?? 0),

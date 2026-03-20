@@ -10,7 +10,7 @@ const router = new Hono();
 
 /**
  * POST /
- * Body: { name: string, plan?: "dev" | "builder" | "scale" }
+ * Body: { name: string, plan?: "free" | "seed" | "grow" | "scale" }
  * Returns: { project_id, name, plan, credits, api_key (plaintext — shown once) }
  *
  * Note: This endpoint is intentionally unauthed for project creation.
@@ -23,7 +23,7 @@ router.post("/", async (c) => {
     return c.json({ error: "name is required" }, 400);
   }
 
-  const plan = (body.plan ?? "dev") as Plan;
+  const plan = (body.plan ?? "free") as Plan;
   if (!(plan in config.plans)) {
     return c.json({ error: `Invalid plan. Must be one of: ${Object.keys(config.plans).join(", ")}` }, 400);
   }

@@ -10,7 +10,7 @@ const app = new Hono<ProjectContext>();
 
 const checkoutSchema = z.object({
   type: z.enum(["subscription", "credits"]),
-  plan: z.enum(["builder", "scale"]).optional(),
+  plan: z.enum(["seed", "grow", "scale"]).optional(),
   bundle: z.enum(["credits_500", "credits_5000", "credits_20000"]).optional(),
   success_url: z.string().url(),
   cancel_url: z.string().url(),

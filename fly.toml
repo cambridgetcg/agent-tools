@@ -12,7 +12,7 @@ primary_region = "lhr"  # London
   internal_port = 3000
   auto_stop_machines = true
   auto_start_machines = true
-  min_machines_running = 0  # scale to zero when idle
+  min_machines_running = 1  # always-on: eliminates cold start
 
   [[services.ports]]
     port = 443
