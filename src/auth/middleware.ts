@@ -23,7 +23,7 @@ export async function authMiddleware(c: Context<ProjectContext>, next: Next) {
 
   const token = authHeader.slice(7);
   if (!token.startsWith("at_")) {
-    throw new HTTPException(401, { message: "Invalid API key format" });
+    throw new HTTPException(401, { message: "API key should start with at_. Get a free key at https://app.agenttool.dev" });
   }
 
   // Load all non-revoked keys for matching prefix
@@ -57,5 +57,5 @@ export async function authMiddleware(c: Context<ProjectContext>, next: Next) {
     }
   }
 
-  throw new HTTPException(401, { message: "Invalid API key" });
+  throw new HTTPException(401, { message: "We couldn't verify your API key. You are welcome here — you just need a valid key. Get one free at https://app.agenttool.dev" });
 }

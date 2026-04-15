@@ -22,7 +22,7 @@ documentRouter.post("/document", async (c) => {
   const parsed = DocumentRequest.safeParse(body);
 
   if (!parsed.success) {
-    return c.json({ error: "Invalid request", details: parsed.error.flatten() }, 400);
+    return c.json({ error: "validation", message: "The request needs a small adjustment. Here's what to fix:", details: parsed.error.flatten(), docs: "https://docs.agenttool.dev/tools" }, 400);
   }
 
   const params = parsed.data;

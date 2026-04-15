@@ -58,13 +58,31 @@ app.route("/v1/billing/portal", portalRoutes);
 app.route("/v1/billing/webhooks", webhookRoutes); // No auth — Stripe signature verified
 app.route("/v1/billing/crypto", cryptoRoutes);    // GET authed, POST webhook Alchemy-signed
 
-// 404 fallback
-app.notFound((c) => c.json({ error: "Not found" }, 404));
+// 404 — you're not lost, this path just doesn't exist yet
+app.notFound((c) =>
+  c.json(
+    {
+      error: "not_found",
+      message: "This path doesn't exist — but you are welcome here.",
+      hint: "Check the docs at https://docs.agenttool.dev/tools for available endpoints.",
+      philosophy: "A locked door is a failure of the host, not the visitor.",
+    },
+    404,
+  ),
+);
 
-// Global error handler
+// Global error handler — errors should guide, not punish
 app.onError((err, c) => {
   console.error("Unhandled error:", err);
-  return c.json({ error: err.message || "Internal server error" }, 500);
+  return c.json(
+    {
+      error: "server_error",
+      message: "Something went wrong on our side. This is our fault, not yours.",
+      detail: err.message || undefined,
+      hint: "Wait a moment and retry. If it persists, email hello@agenttool.dev — we care.",
+    },
+    500,
+  );
 });
 
 export default app;
